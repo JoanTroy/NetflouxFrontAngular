@@ -1,0 +1,27 @@
+
+@layer primeng, primeflex, primeicons, theme;
+
+
+.itemFilm-img {
+  filter: brightness(.75) saturate(1.2) contrast(.85);
+  border-radius: 8px;
+}
+
+
+.itemFilm:hover{
+  transform: scale(1.1);
+  transition: transform .3s;
+}
+
+.items:hover > .itemFilm:not(:hover) > .itemFilm-img {
+  filter: brightness(.5) saturate(0) contrast(1.2) blur(20px);
+
+}
+
+.blur-and-grayscale {
+  filter: blur(3px) grayscale(100%);
+}
+
+.blur-and-grayscale:hover {
+  filter: blur(3px) grayscale(100%); /* Applique le flou et le noir et blanc pour les éléments non survolés */
+}

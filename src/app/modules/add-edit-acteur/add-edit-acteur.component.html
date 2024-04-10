@@ -1,0 +1,62 @@
+<p-dialog
+  header="{{ modalType }} Acteur"
+  [(visible)]="displayAddModal"
+  [modal]="true"
+  [style]="{ width: '50vw', height: '90vh' }"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="closeModal()"
+>
+
+  <form [formGroup]="acteurForm" class="acteur-form">
+
+    <div class="field">
+      <label class="block" for="nom">Nom</label>
+      <input type="text" pInputText id="nom" formControlName="nom"/>
+      <small
+        class="p-error block"
+        *ngIf="acteurForm.controls['nom'].invalid && acteurForm.controls['nom'].dirty">
+        Le champ est requis
+      </small>
+    </div>
+       <div class="field">
+      <label class="block" for="prenom">Prenom</label>
+      <input type="text" pInputText id="prenom" formControlName="prenom"/>
+      <small
+        class="p-error block"
+        *ngIf="acteurForm.controls['prenom'].invalid && acteurForm.controls['prenom'].dirty">
+        Le champ est requis
+      </small>
+    </div>
+    <div class="field">
+      <label class="block" for="dateNaissance">Date de naissance</label>
+
+      <p-calendar
+        formControlName="dateNaissance"
+        id="dateNaissance"
+        dateFormat="dd/mm/yy"
+        [showIcon]="true"
+      ></p-calendar>
+      <small
+        class="p-error block"
+        *ngIf="acteurForm.controls['dateNaissance'].invalid && acteurForm.controls['dateNaissance'].dirty">
+        Le champ est requis
+      </small>
+    </div>
+
+
+  </form>
+
+  <ng-template pTemplate="footer">
+    <p-button
+      (click)="addEditActeur()"
+      label="{{ modalType }}"
+      severity="success"
+      styleClass="p-button-text"
+      [disabled]="acteurForm.invalid"
+    ></p-button>
+
+    <p-button (click)="closeModal()" label="Cancel" severity="danger" styleClass="p-button-text"></p-button>
+  </ng-template>
+
+</p-dialog>

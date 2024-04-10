@@ -1,0 +1,11 @@
+@layer primeng;
+
+.menuBar {
+  padding: 2vh 0 2vh 0;
+  height: 15vh
+}
+
+.mainPage {
+  height: 85vh;
+  width: 95vw;
+}

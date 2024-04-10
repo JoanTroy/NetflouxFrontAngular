@@ -1,0 +1,63 @@
+<div class="card">
+
+  <p-carousel
+    [value]="films"
+    [numVisible]="3"
+    [numScroll]="3"
+    [circular]="false"
+    [responsiveOptions]="responsiveOptions"
+
+    >
+    <ng-template pTemplate="header">
+      <h3>Film du moment</h3>
+    </ng-template>
+
+    <ng-template let-film pTemplate="item" class="items">
+
+      <div class="itemFilm">
+      <div class="border-0 surface-border border-round m-2 text-center py-5 px-3 ">
+        <div class="mb-3 ">
+          <img src="http://www.recourir.fr/wp-content/uploads/2014/06/forest_gump_affiche.jpg" [alt]="film.titre" class="w-6 shadow-2 itemFilm-img"/>
+        </div>
+        <div>
+          <h4 class="mb-1">{{ film.titre }}</h4>
+          <h6 class="mt-0 mb-3">{{ film.duree }}</h6>
+
+          <div class="mt-5 flex align-items-center justify-content-center gap-2">
+            <p-button icon="pi pi-play" [rounded]="true"/>
+            <p-button icon="pi pi-star-fill" [rounded]="true" severity="secondary"/>
+          </div>
+        </div>
+      </div>
+      </div>
+    </ng-template>
+
+  </p-carousel>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var filmItems = document.querySelectorAll('.film-item');
+
+    filmItems.forEach(function (item) {
+      item.addEventListener('mouseover', function () {
+        // Ajoute la classe blur-and-grayscale à tous les éléments .film-item, sauf celui survolé
+        filmItems.forEach(function (otherItem) {
+          if (otherItem !== item) {
+            otherItem.classList.add('blur-and-grayscale');
+            console.log('Blur added !');
+          }
+        });
+      });
+
+      item.addEventListener('mouseout', function () {
+        // Retire la classe blur-and-grayscale de tous les éléments .film-item
+        filmItems.forEach(function (otherItem) {
+          otherItem.classList.remove('blur-and-grayscale');
+        });
+      });
+    });
+  });
+
+</script>

@@ -1,0 +1,72 @@
+<section class="acteurComponent">
+
+  <div class="flex justify-content-between">
+    <h2>Acteurs</h2>
+    <p-button label="Ajouter un Acteur" (click)="showAddModal()"></p-button>
+  </div>
+
+  <p-table
+    [value]="acteurs"
+    [scrollable]="true"
+    scrollHeight="65vh"
+    [paginator]="true"
+    [rows]="request.rows"
+    [first]="request.first"
+    [lazy]="true"
+    (onLazyLoad)="loadActeurs($event)"
+    [totalRecords]="totalRecords"
+
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Date de Naissance</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-acteur>
+      <tr>
+        <td>{{ acteur.nom }}</td>
+        <td>{{ acteur.prenom }}</td>
+        <td>{{ acteur.dateNaissance | date:'dd/MM/yyyy' }}  </td>
+        <td>
+          <p-button
+            pButton
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-success mr-2"
+            severity="success"
+            (onClick)="showEditModal(acteur)"
+          ></p-button>
+          <p-button
+            pButton
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-danger"
+            severity="danger"
+            (onClick)="deleteActeur(acteur)"
+          ></p-button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft">
+      <p-button type="button" icon="pi pi-plus" styleClass="p-button-text" (onClick)="showAddModal()"></p-button>
+    </ng-template>
+    <ng-template pTemplate="paginatorright">
+      <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+    </ng-template>
+
+  </p-table>
+
+
+  <app-add-edit-acteur
+    [displayAddModal]="displayAddEditModal"
+    [selectedActeur]="selectedActeur"
+    (clickClose)="hideAddModal($event)"
+    (clickAddEdit)="save()"
+  ></app-add-edit-acteur>
+
+  <p-toast position="bottom-right"></p-toast>
+
+  <p-confirmDialog header="Supprimer"></p-confirmDialog>
+
+</section>
